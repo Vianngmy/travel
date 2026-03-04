@@ -2145,11 +2145,19 @@
 
             <!-- LOGO 切換按鈕 (暫時用文字代替，直到圖片上傳) -->
             <div class="logo-selector-row">
-                <button onclick="showChecklist('logo1', this)" class="logo-selector active">①</button>
-                <button onclick="showChecklist('logo2', this)" class="logo-selector">②</button>
-                <button onclick="showChecklist('logo3', this)" class="logo-selector">③</button>
-                <button onclick="showChecklist('logo4', this)" class="logo-selector">④</button>
-            </div>
+    <button onclick="showChecklist('logo1', this)" class="logo-selector active">
+        <img src="LOGO1.png" alt="LOGO 1" class="logo-image">
+    </button>
+    <button onclick="showChecklist('logo2', this)" class="logo-selector">
+        <img src="LOGO2.png" alt="LOGO 2" class="logo-image">
+    </button>
+    <button onclick="showChecklist('logo3', this)" class="logo-selector">
+        <img src="LOGO3.png" alt="LOGO 3" class="logo-image">
+    </button>
+    <button onclick="showChecklist('logo4', this)" class="logo-selector">
+        <img src="LOGO4.png" alt="LOGO 4" class="logo-image">
+    </button>
+</div>
             
             <!-- 行李清單卡片容器 -->
             <div id="checklist-container" class="px-2"></div>
@@ -3112,4 +3120,5 @@
         }
     </script>
 </body>
+
 </html>
