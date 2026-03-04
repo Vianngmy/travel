@@ -1,0 +1,3115 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>成都川西遊</title>
+    
+    <!-- iPhone 主畫面圖示 (請將 apple-icon.png 替換為您的圖示檔名) -->
+    <link rel="apple-touch-icon" href="apple-icon.png">
+    <!-- 如果沒有圖示，可以先註解掉上面那行，或使用 LOGO 圖片 -->
+    <!-- <link rel="apple-touch-icon" href="LOGO1.png"> -->
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 思源黑體 & 素材集市社會體 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Noto+Serif+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --heading-bg: #edb1a3;
+            --heading-text: #425327;
+            --stripe-pink: #E480B4;
+            --stripe-red: #DD3B26;
+            --ticket-base: #F6E4C8;
+            --ticket-blue: #538fb8;
+            --ticket-border: #a00318;
+            --weather-green: #127332;
+            --dot-pink: #f57196;
+            --region-bg: #F0E6DA;
+            --region-text: #4f6815;
+            --nav-bg: #EDB1A3;
+            --nav-green: #1e7829;
+            --iti-blue: #70a0c2;
+            --iti-brown: #692c04;
+            --meal-red: #AC5b67;
+            --plan-base: #efd4c4;
+            --text-dark: #44201c;
+            --modal-gold: #ddb355;
+            --modal-text: #c85e3d;
+            --input-bg: #dfc7b4;
+            --save-btn: #3d7695;
+            --btn-pink: #EB7579;
+            --btn-blue: #235581;
+            --sights-stripe: #8DA1B5;
+            --btn-bg: #f2e7d3;
+            --btn-text: #70a0c2;
+            --disabled-bg: rgba(128, 128, 128, 0.3);
+            --morning-tag: #a54a44;
+            --delete-btn: #8c2e27;
+            --modal-sight-bg: #4a9e68;
+            --modal-sight-text: #134524;
+            --grid-color: #c2c2c2;
+            --dot-color: #808080;
+        }
+
+        body { 
+            background-color: #FFFFFF; 
+            font-family: Arial, "Helvetica Neue", sans-serif; 
+            padding-bottom: 70px;
+            overflow-x: hidden;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 隱藏滾動條但保留功能 */
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* 自訂滑軸樣式 */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: var(--modal-sight-bg);
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: var(--modal-sight-text);
+            border-radius: 4px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #0f331c;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-button {
+            background: var(--modal-sight-text);
+            height: 16px;
+        }
+
+        /* ===== 標題區塊 - 固定寬度 458.05px ===== */
+        .heading-section { 
+            background-color: var(--heading-bg); 
+            text-align: center; 
+            padding-top: 40px; 
+            position: relative; 
+            width: 458.05px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        .header-title-box {
+            display: inline-block; 
+            width: 320px;
+            margin: 0 auto;
+        }
+
+        .title-cn { 
+            font-family: 'Noto Serif TC', serif; 
+            color: var(--heading-text); 
+            font-size: 36px;
+            font-weight: 900; 
+            line-height: 1.2;
+            display: flex; 
+            justify-content: space-between;
+            margin: 0;
+            letter-spacing: normal;
+        }
+
+        .title-en { 
+            font-family: 'Playfair Display', serif; 
+            color: var(--heading-text); 
+            font-size: 10px; 
+            font-weight: 700;
+            display: flex; 
+            justify-content: space-between;
+            margin-top: 5px;
+            letter-spacing: 0.5px;
+        }
+
+        .header-bottom-decor {
+            height: 20px; 
+            width: 458.05px; 
+            max-width: 100%;
+            margin-top: 10px; 
+            background: var(--stripe-pink);
+            background-image: repeating-linear-gradient(90deg, transparent, transparent 15px, var(--stripe-red) 15px, var(--stripe-red) 18px, transparent 18px, transparent 35px, var(--stripe-red) 35px, var(--stripe-red) 36px);
+        }
+
+        /* ===== 主頁 - 寬度 458px，高度 480px，小圓點背景 ===== */
+        #page-main {
+            width: 458px;
+            height: 480px;
+            max-width: 100%;
+            margin: 0 auto;
+            position: relative;
+            background-color: white;
+            background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+            background-size: 18.9px 18.9px;
+            overflow-y: auto;
+        }
+
+        /* ===== 機票滑動區 400*129 置中 (下移0.5cm) ===== */
+        .ticket-wrapper { 
+            background-color: transparent;
+            width: 400px;
+            height: 129px;
+            max-width: 100%;
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            padding: 0;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;
+            margin: 0 auto;
+            position: relative;
+            top: 18.9px;
+            z-index: 5;
+            align-items: center;
+        }
+        
+        /* 機票卡片 340*111 */
+        .ticket {
+            background-color: #d9b7b0;
+            min-width: 340px;
+            flex-shrink: 0;
+            border: none;
+            padding: 0;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 111px;
+            scroll-snap-align: start;
+            border-radius: 0 0 18px 18px / 0 0 26px 26px;
+            overflow: hidden;
+            clip-path: path('M 0,0 L 100%,0 L 100%,85% L 95%,100% L 5%,100% L 0,85% Z');
+            align-self: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .ticket-top-stripe {
+            height: 7px;
+            background-color: #3d2d13;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .ticket-bottom-stripe {
+            height: 5px;
+            background-color: #3d2d13;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .ticket-content {
+            padding: 4px 12px;
+            position: relative;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .ticket::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 33.33%;
+            width: 2px;
+            border-right: 2px dashed white;
+            pointer-events: none;
+            z-index: 10;
+        }
+        
+        .ticket-left-section {
+            position: absolute;
+            left: 0;
+            right: 33.33%;
+            top: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            padding: 4px 8px 0 8px;
+            z-index: 5;
+        }
+        
+        .left-boarding-pass {
+            font-family: Helvetica, sans-serif;
+            font-weight: bold;
+            font-size: 10px;
+            color: #700903;
+            margin-bottom: 2px;
+            text-align: left;
+        }
+        
+        .airport-code-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            width: 100%;
+            margin-top: 0;
+        }
+        
+        .airport-block {
+            display: flex;
+            flex-direction: column;
+            min-width: 70px;
+        }
+        
+        .airport-fullname {
+            font-family: Helvetica, sans-serif;
+            font-weight: normal;
+            font-size: 8px;
+            color: #3d2d13;
+            line-height: normal;
+            margin-bottom: 1px;
+            white-space: nowrap;
+        }
+        
+        .airport-code-main {
+            font-family: Helvetica, sans-serif;
+            font-weight: bold;
+            font-size: 20px;
+            color: #700903;
+            line-height: 1.2;
+        }
+        
+        .flight-icon-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .flight-icon {
+            font-size: 16px;
+            color: #700903;
+        }
+        
+        .flight-info-container {
+            margin-top: auto;
+            margin-bottom: 3px;
+            width: 100%;
+        }
+        
+        .flight-icons { 
+            display: flex; 
+            justify-content: space-between; 
+            font-family: Helvetica, sans-serif; 
+            font-weight: 900; 
+            font-size: 9px; 
+            color: #402509; 
+            border-top: 1px dashed rgba(64, 37, 9, 0.3);
+            padding-top: 3px;
+            width: 100%;
+        }
+        
+        .ticket-right-section {
+            position: absolute;
+            left: 66.67%;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            padding: 4px 0 4px 8px;
+            z-index: 5;
+            width: 33.33%;
+        }
+        
+        .flight-no-block {
+            margin-bottom: 3px;
+        }
+        
+        .flight-no-label {
+            font-family: Helvetica, sans-serif;
+            font-size: 8px;
+            color: #402509;
+        }
+        
+        .ticket-no {
+            font-family: Helvetica, sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            color: #402509;
+        }
+        
+        .datetime-container {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 3px;
+            flex-wrap: wrap;
+        }
+        
+        .date-block, .time-block {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .date-label, .time-label {
+            font-family: Helvetica, sans-serif;
+            font-size: 8px;
+            color: #402509;
+        }
+        
+        .date-value, .time-value {
+            font-family: Helvetica, sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            color: #402509;
+            white-space: nowrap;
+        }
+        
+        .datetime-separator {
+            font-family: Helvetica, sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            color: #402509;
+            align-self: flex-end;
+            margin-bottom: 2px;
+        }
+        
+        .barcode-container {
+            margin-top: auto;
+            margin-bottom: 3px;
+        }
+        
+        .barcode-icon {
+            font-size: 28px;
+            color: #402509;
+        }
+
+        /* ===== 天氣修飾條 - 130.07*62.67 置中 + 下移0.8cm ===== */
+        .weather-decoration-container {
+            width: 458px;
+            max-width: 100%;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            top: 30.24px;  /* 0.8cm = 30.24px */
+            z-index: 5;
+            margin: 0;
+        }
+        
+        .weather-dot-bar {
+            height: 62.67px;
+            background-color: var(--weather-green); 
+            width: 130.07px;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            background-image: radial-gradient(var(--dot-pink) 15px, transparent 18px); 
+            background-size: 30px 30px;
+            transform: rotate(-12deg);
+            position: relative;
+            clip-path: polygon(
+                0% 0%, 
+                100% 0%, 
+                98% 20%, 
+                100% 40%, 
+                98% 60%, 
+                100% 80%, 
+                98% 100%, 
+                2% 100%, 
+                0% 80%, 
+                2% 60%, 
+                0% 40%, 
+                2% 20%
+            );
+        }
+        
+        .weather-bar-text { 
+            color: #F8ECDE; 
+            font-family: 'Noto Serif TC', serif; 
+            font-size: 20px;
+            font-weight: 900; 
+            z-index: 5; 
+            transform: rotate(0deg);
+            white-space: nowrap;
+        }
+
+        /* ===== 天氣卡片滑動區 400*202 置中 + 下移0.8cm ===== */
+        .weather-scroll-row { 
+            display: flex; 
+            overflow-x: auto; 
+            gap: 15px; 
+            padding: 0;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;
+            width: 400px;
+            height: 202px;
+            margin: 0 auto;
+            position: relative;
+            top: 30.24px;  /* 0.8cm = 30.24px */
+            align-items: center;
+            z-index: 5;
+        }
+        
+        /* 天氣卡片 148*166 */
+        .weather-card { 
+            min-width: 148px;
+            background-color: #f2ebe4;
+            border: none;
+            border-radius: 0;
+            padding: 0;
+            flex-shrink: 0; 
+            color: var(--region-text);
+            display: flex;
+            flex-direction: column;
+            height: 166px;
+            scroll-snap-align: start;
+            margin-top: 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        
+        .weather-card-top {
+            height: 83px;
+            width: 148px;
+            padding: 6px 8px;
+            position: relative;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            grid-template-rows: auto 1fr;
+            gap: 2px 4px;
+            background-color: #f2ebe4;
+        }
+        
+        .weather-region {
+            grid-column: 1 / -1;
+            grid-row: 2;
+            font-family: 'Noto Serif TC', serif;
+            font-weight: 900;
+            font-size: 14px;
+            color: #4f6815;
+            align-self: center;
+            justify-self: start;
+            margin-top: 0;
+        }
+        
+        .weather-temp-val {
+            grid-column: 1;
+            grid-row: 1;
+            font-family: 'Noto Serif TC', serif;
+            font-size: 13px;
+            font-weight: 900;
+            color: #4f6815;
+            justify-self: start;
+            align-self: end;
+        }
+        
+        .weather-temp-range {
+            grid-column: 2;
+            grid-row: 1;
+            font-family: 'Noto Serif TC', serif;
+            font-size: 11px;
+            font-weight: 900;
+            color: #4f6815;
+            justify-self: start;
+            align-self: end;
+            margin-left: 2px;
+            opacity: 0.8;
+            white-space: nowrap;
+        }
+        
+        .weather-icon {
+            grid-column: 3;
+            grid-row: 1;
+            font-size: 18px;
+            color: #402509;
+            justify-self: end;
+            align-self: start;
+        }
+        
+        .weather-divider-container {
+            position: relative;
+            width: 148px;
+            height: 1px;
+            margin: 0;
+        }
+        
+        .weather-divider {
+            height: 1px;
+            background-image: radial-gradient(black 2px, transparent 2px);
+            background-size: 8px 1px;
+            width: 148px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        .divider-left-circle {
+            position: absolute;
+            left: -4px;
+            top: -7px;
+            width: 14px;
+            height: 14px;
+            background-color: white;
+            border-radius: 50%;
+            z-index: 2;
+        }
+        
+        .divider-right-circle {
+            position: absolute;
+            right: -4px;
+            top: -7px;
+            width: 14px;
+            height: 14px;
+            background-color: white;
+            border-radius: 50%;
+            z-index: 2;
+        }
+        
+        .weather-card-bottom {
+            height: 82px;
+            width: 148px;
+            background-color: #f2ebe4;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .weather-bottom-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* ===== 行程頁 ===== */
+        #page-itinerary {
+            width: 458.05px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        .iti-section {
+            width: 458.05px;
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        #scrolling-dates {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding: 10px 0;
+            width: 410px;
+            max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .iti-header-row {
+            display: flex;
+            gap: 0;
+            margin-bottom: 10px;
+            align-items: stretch;
+            width: 400px;
+            max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .date-stripe-box {
+            background-color: var(--iti-blue);
+            background-image: repeating-linear-gradient(90deg, transparent, transparent 8px, var(--iti-brown) 8px, var(--iti-brown) 16px);
+            width: 140px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 10px 5px;
+            flex-shrink: 0;
+        }
+        
+        .iti-cal-day {
+            font-size: 37px;
+            font-weight: 900;
+            color: white;
+            line-height: 0.9;
+        }
+        
+        .iti-cal-month {
+            font-size: 18px;
+            font-weight: 900;
+            color: white;
+            text-transform: uppercase;
+        }
+        
+        .hotel-nav-card {
+            background-color: var(--iti-blue);
+            flex: 1;
+            padding: 5px 10px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
+            color: var(--iti-brown);
+            width: auto;
+        }
+        
+        .hotel-h3 { 
+            font-size: 14px; 
+            font-weight: 900; 
+            margin-bottom: 3px; 
+        }
+        
+        .hotel-name { 
+            font-family: 'Noto Serif TC', serif; 
+            font-weight: 900; 
+            font-size: 18px; 
+            line-height: 1.1; 
+        }
+        
+        .hotel-addr { 
+            font-size: 12px; 
+            font-weight: bold; 
+            margin-top: 3px; 
+            line-height: 1.2; 
+        }
+        
+        .gps-button {
+            background: var(--iti-brown);
+            color: var(--iti-blue);
+            border-radius: 10px;
+            padding: 5px 10px;
+            font-weight: 900;
+            text-align: center;
+            font-size: 14px;
+            grid-column: span 2;
+        }
+
+        .btn-style {
+            background: var(--btn-bg) !important;
+            color: var(--btn-text) !important;
+            border-radius: 0;
+            font-weight: 900;
+            width: 168px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            line-height: 1;
+            padding: 0;
+        }
+
+        .date-btn {
+            flex-shrink: 0;
+            padding: 5px 18px;
+            border-radius: 10px;
+            font-weight: 900;
+            background: #f2e7d3;
+            color: #70a0c2;
+            border: none;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+        .date-btn-active {
+            background: #692c04 !important;
+            color: #70a0c2 !important;
+        }
+
+        .plan-card {
+            background-color: transparent;
+            padding: 0;
+            margin-bottom: 10px;
+            border: none;
+            width: 380px;
+            max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 5;
+        }
+
+        .timeline-container {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .timeline-line {
+            width: 5px;
+            border-radius: 2px;
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+        
+        .timeline-line.spot {
+            background-color: #70a0c2;
+        }
+        
+        .timeline-line.food {
+            background-color: #692C04;
+        }
+        
+        .timeline-line.morning {
+            background-color: white;
+        }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .time-tag {
+            background-color: #EFE7D2;
+            color: #573a2a;
+            padding: 2px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 900;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        
+        .time-tag.morning {
+            background-color: var(--morning-tag);
+            color: white;
+        }
+
+        .drive-tag {
+            color: #573a2a;
+            font-size: 14px;
+            font-weight: 900;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .destination-title {
+            font-size: 15px;
+            font-weight: 900;
+            color: #a1927a;
+            line-height: 1.2;
+            margin: 5px 0;
+        }
+
+        .spot-desc {
+            font-size: 12px;
+            font-weight: normal;
+            color: #a1927a;
+            margin-top: 3px;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .map-nav-btn {
+            background-color: #b6b6b6;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 0;
+            font-size: 12px;
+            font-weight: normal;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 5px;
+        }
+
+        .plan-photo-card {
+            flex-shrink: 0;
+            width: 134px;
+            height: 89px;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: white;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        .plan-photo-card .photo-image {
+            width: 100%;
+            height: 60px;
+            object-fit: cover;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .plan-photo-card .photo-caption {
+            padding: 3px 5px;
+            font-size: 10px;
+            font-weight: 700;
+            color: #2d3748;
+            text-align: center;
+            word-break: break-word;
+            line-height: 1.2;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .plan-photo-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 12px;
+            padding: 5px 0;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .plan-delete-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 24px;
+            height: 24px;
+            background-color: #ff4444;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 20;
+            border: none;
+        }
+
+        .button-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 15px 0;
+            width: 458.05px;
+            max-width: 100%;
+        }
+
+        /* ===== 景點頁面 ===== */
+        .sights-header {
+            font-size: 18px;
+            font-weight: normal;
+            color: #1f2937;
+            font-style: normal;
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
+        }
+        
+        #page-sights {
+            height: auto;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            width: 458.05px;
+            max-width: 100%;
+            margin: 0 auto;
+            padding-bottom: 0;
+            background-color: white;
+            background-image: 
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 18.9px 18.9px;
+        }
+        
+        .sights-content {
+            flex: 1;
+            padding: 0 10px;
+            overflow-y: auto;
+            margin-bottom: 0;
+            width: 420px;
+            max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .sights-header-container {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            padding: 0 10px;
+            width: 420px;
+            max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .add-sight-btn {
+            background-color: transparent;
+            color: #1e3a8a;
+            width: 40px;
+            height: 40px;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            font-size: 24px;
+            transition: transform 0.2s;
+        }
+        
+        .polaroid-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 10px;
+            width: 100%;
+        }
+        
+        .polaroid-card {
+            width: 100%;
+            aspect-ratio: 155 / 200;
+            background-color: #f2f2f2;
+            border: none;
+            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.15);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            overflow: visible;
+            margin-bottom: 25px;
+        }
+        
+        .polaroid-photo-container {
+            position: absolute;
+            top: 16.22px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 110px;
+            height: 110px;
+            border: 1px solid #e0e0e0;
+            background-color: #f0f0f0;
+            z-index: 5;
+            overflow: hidden;
+        }
+        
+        .polaroid-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .polaroid-title {
+            position: absolute;
+            bottom: 6px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-family: 'Noto Sans TC', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            color: #333;
+            padding: 0 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            z-index: 6;
+        }
+        
+        .polaroid-description {
+            position: absolute;
+            bottom: -32.56px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-family: 'Noto Sans TC', sans-serif;
+            font-size: 16px;
+            color: #666;
+            padding: 0 5px;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            max-height: 42px;
+            z-index: 6;
+        }
+        
+        .tape {
+            position: absolute;
+            top: -5px;
+            width: 30px;
+            height: 15px;
+            background-color: var(--tape-color);
+            border: none;
+            transform: rotate(var(--rotation, 0deg));
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 10;
+            pointer-events: none;
+            clip-path: polygon(
+                0% 0%, 
+                100% 0%, 
+                95% 30%, 
+                100% 60%, 
+                95% 100%, 
+                5% 100%, 
+                0% 60%, 
+                5% 30%
+            );
+        }
+        
+        .polaroid-delete-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 24px;
+            height: 24px;
+            background-color: #ff4444;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 20;
+            border: none;
+        }
+        
+        .photo-lightbox {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 3000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .lightbox-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 20px 0;
+            width: 100%;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;
+        }
+        
+        .lightbox-image {
+            flex-shrink: 0;
+            width: 80vw;
+            height: 60vh;
+            object-fit: contain;
+            scroll-snap-align: center;
+        }
+        
+        .close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 3001;
+        }
+        
+        .trapezoid-container {
+            position: absolute;
+            width: 120px;
+            height: 28px;
+            left: 37.8px;
+            top: -24.22px;
+            z-index: 10;
+        }
+        
+        .sights-trapezoid {
+            width: 120px;
+            height: 28px;
+            background-color: #8DA1B5;
+            clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%);
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        .sights-bottom-stripe {
+            width: 458.05px;
+            max-width: 100%;
+            height: 140px;
+            background-color: #8DA1B5;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .paper-folder-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            position: relative;
+            top: -15.12px;
+        }
+        
+        .paper-folder-text {
+            font-family: Helvetica, sans-serif;
+            font-weight: bold;
+            font-size: 22px;
+            color: #000000;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        
+        .black-line {
+            width: 80%;
+            height: 3px;
+            background-color: #000000;
+            margin: 0 auto;
+        }
+        
+        .delete-sight-bottom-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 40px;
+            height: 40px;
+            background-color: #8c2e27;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            font-size: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            z-index: 20;
+            transition: background-color 0.2s;
+        }
+
+        /* ===== 匯率頁面 ===== */
+        #page-wallet {
+            width: 458.05px;
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 500px;
+        }
+        
+        .wallet-container {
+            width: 370px;
+            height: 456.4px;
+            max-width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+
+        /* ===== 清單頁 ===== */
+        #page-list {
+            width: 458.05px;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px 0;
+            min-height: 500px;
+            background-color: white;
+            background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+            background-size: 18.9px 18.9px;
+        }
+
+        /* 清單頁 LOGO 切換按鈕 */
+        .logo-selector-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 20px auto 20px;
+            padding: 0 10px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .logo-selector {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 3px solid var(--heading-text, #425327);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background-color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #692c04;
+        }
+
+        .logo-selector.active {
+            border-color: #692c04;
+            border-width: 4px;
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .logo-selector:hover {
+            transform: scale(1.1);
+        }
+
+        .logo-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 行李清單卡片樣式 */
+        .checklist-card {
+            background-color: #f9f3e9;
+            border: 2px solid #692c04;
+            padding: 16px;
+            margin-bottom: 16px;
+            border-radius: 0;
+            box-shadow: 4px 4px 0 rgba(105, 44, 4, 0.2);
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .checklist-heading {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 20px;
+            font-weight: 900;
+            color: #692c04;
+            margin-bottom: 12px;
+            border-bottom: 2px dashed #692c04;
+            padding-bottom: 4px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 6px 0;
+            font-size: 16px;
+            color: #44201c;
+            border-bottom: 1px solid rgba(105, 44, 4, 0.1);
+        }
+
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+
+        .checklist-item.checked {
+            text-decoration: line-through;
+            color: #888;
+            opacity: 0.7;
+        }
+
+        .checklist-checkbox {
+            width: 22px;
+            height: 22px;
+            border: 2px solid #692c04;
+            background-color: white;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            border-radius: 0;
+            transition: all 0.2s;
+        }
+
+        .checklist-checkbox:checked {
+            background-color: #692c04;
+            position: relative;
+        }
+
+        .checklist-checkbox:checked::after {
+            content: '✓';
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        /* 注意事項卡片樣式 */
+        .notice-card {
+            background-color: #fff3e0;
+            border: 3px solid #c85e3d;
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 0;
+            box-shadow: 6px 6px 0 rgba(200, 94, 61, 0.3);
+            width: 100%;
+            max-width: 420px;
+            position: relative;
+        }
+
+        .notice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-family: 'Noto Serif TC', serif;
+            font-weight: 900;
+            font-size: 24px;
+            color: #c85e3d;
+            border-bottom: 3px dotted #c85e3d;
+            padding-bottom: 8px;
+        }
+
+        .notice-add-btn {
+            background-color: #c85e3d;
+            color: white;
+            border: none;
+            width: 36px;
+            height: 36px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .notice-add-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .notice-item {
+            background-color: #fff9f0;
+            border: 2px solid #c85e3d;
+            padding: 15px;
+            margin-bottom: 15px;
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+            min-height: 140px;
+        }
+
+        .notice-image-container {
+            width: 140px;
+            height: 140px;
+            flex-shrink: 0;
+            border: 2px solid #c85e3d;
+            background-color: #f0f0f0;
+            overflow: hidden;
+        }
+
+        .notice-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .notice-content {
+            flex: 1;
+            font-size: 16px;
+            color: #44201c;
+            line-height: 1.5;
+            word-break: break-word;
+            padding-right: 30px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .notice-delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            background-color: #c85e3d;
+            color: white;
+            border: none;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .notice-delete-btn:hover {
+            background-color: #a5452a;
+        }
+
+        /* 新增注意事項模態框 */
+        .notice-modal {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .notice-modal-content {
+            background-color: #fff3e0;
+            width: 100%;
+            max-width: 400px;
+            border: 3px solid #c85e3d;
+            padding: 24px;
+        }
+
+        .notice-modal-title {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 24px;
+            font-weight: 900;
+            color: #c85e3d;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 3px dotted #c85e3d;
+            padding-bottom: 10px;
+        }
+
+        .notice-modal-input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #c85e3d;
+            background-color: white;
+            font-size: 16px;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        .notice-modal-file {
+            margin-bottom: 20px;
+        }
+
+        .notice-modal-file label {
+            display: block;
+            font-weight: 700;
+            color: #c85e3d;
+            margin-bottom: 8px;
+        }
+
+        .notice-modal-file input {
+            width: 100%;
+            padding: 8px;
+            border: 2px solid #c85e3d;
+            background-color: white;
+        }
+
+        .notice-modal-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .notice-modal-btn {
+            flex: 1;
+            background-color: #c85e3d;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .notice-modal-btn.cancel {
+            background-color: #8c2e27;
+        }
+
+        /* ===== 頁面容器 ===== */
+        .tab-page {
+            margin: 0 auto;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ===== 底部導航 ===== */
+        .footer-nav { 
+            position: fixed; 
+            bottom: 0; 
+            left: 50%;
+            transform: translateX(-50%);
+            width: 458.05px; 
+            max-width: 100%;
+            z-index: 1000;
+        }
+        .nav-l12 { 
+            height: 7.64px; 
+            background: var(--nav-green);
+            width: 100%;
+            position: relative;
+            z-index: 1001;
+        }
+        .nav-l8 { 
+            height: 5.09px; 
+            background: white;
+            width: 100%;
+            position: relative;
+            z-index: 1001;
+        }
+        .nav-l7 { 
+            height: 4.08px; 
+            background: var(--nav-green);
+            width: 100%;
+            position: relative;
+            z-index: 1001;
+        }
+        .nav-inner { 
+            background: var(--nav-bg); 
+            display: flex; 
+            justify-content: space-around; 
+            padding: 8px 5px 15px;
+            width: 100%;
+            position: relative;
+            z-index: 1001;
+        }
+        .nav-item { 
+            flex: 1; 
+            text-align: center; 
+            color: #9e2b10; 
+            font-size: 12px;
+            cursor: pointer;
+        }
+        .nav-item i {
+            font-size: 18px;
+            display: block;
+            margin-bottom: 3px;
+        }
+        .nav-item span {
+            font-size: 10px;
+        }
+        .nav-active { 
+            background: #9e2b10; 
+            color: var(--nav-bg) !important; 
+            border-radius: 10px; 
+            padding: 5px 0; 
+            transform: translateY(-3px); 
+        }
+
+        .hide { display: none !important; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+
+        /* ===== 新增行程模態框樣式 ===== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        
+        .modal-container {
+            background-color: #70a0c2;
+            width: 100%;
+            max-width: 400px;
+            border: 2px solid #692c04;
+            padding: 20px 16px;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        
+        .modal-title {
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            font-weight: 700;
+            color: #9e1606;
+            margin-bottom: 16px;
+        }
+        
+        .modal-title-row {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            line-height: 1;
+        }
+        
+        .modal-title-row.next {
+            font-size: 60px;
+        }
+        
+        .modal-title-row.destination {
+            font-size: 18px;
+            letter-spacing: 0;
+        }
+        
+        .modal-category-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-category-left {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .modal-category-right {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .modal-morning-btn {
+            padding: 4px 10px;
+            font-weight: 700;
+            font-size: 14px;
+            background-color: transparent;
+            color: #9e1606;
+            border: 1px dashed #9e1606;
+            border-radius: 0;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .modal-morning-btn.selected {
+            border: 1px dashed white;
+            color: white;
+        }
+        
+        .modal-category-btn {
+            padding: 4px 10px;
+            font-weight: 700;
+            font-size: 14px;
+            background-color: transparent;
+            color: #9e1606;
+            border: 1px dashed #9e1606;
+            border-radius: 0;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+        
+        .modal-category-btn.selected {
+            border: 1px dashed white;
+            color: white;
+        }
+        
+        .modal-form-group {
+            margin-bottom: 16px;
+        }
+        
+        .modal-label {
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            color: #692c04;
+            margin-bottom: 4px;
+            display: block;
+        }
+        
+        .modal-input, 
+        .modal-select,
+        .modal-textarea {
+            width: 100%;
+            padding: 8px 10px;
+            background-color: white;
+            border: 1px solid #9e1606;
+            border-radius: 0;
+            color: #692c04;
+            font-weight: 700;
+            font-size: 14px;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        
+        .modal-input.disabled,
+        .modal-select.disabled,
+        .modal-textarea.disabled {
+            background-color: var(--disabled-bg);
+            border-color: #999;
+            color: #666;
+            pointer-events: none;
+        }
+        
+        .modal-textarea {
+            resize: none;
+            height: 60px;
+        }
+        
+        .modal-time-selector {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .modal-time-selector .modal-input {
+            width: 60%;
+        }
+        
+        .modal-time-selector .modal-select {
+            width: 40%;
+        }
+        
+        .modal-photo-card {
+            margin-bottom: 16px;
+            border: 1px dashed #9e1606;
+            padding: 12px;
+        }
+        
+        .modal-photo-card input[type="file"] {
+            width: 100%;
+            padding: 6px;
+            margin-bottom: 8px;
+            font-size: 12px;
+            color: #692c04;
+        }
+        
+        .modal-photo-card input[type="text"] {
+            width: 100%;
+            padding: 6px 8px;
+            border: 1px solid #9e1606;
+            border-radius: 0;
+            font-size: 12px;
+        }
+        
+        .modal-button-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .modal-btn {
+            flex: 1;
+            background-color: #9e1606;
+            color: white;
+            border: none;
+            border-radius: 0;
+            font-weight: 900;
+            padding: 12px 0;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        .modal-btn.cancel {
+            background-color: #9e1606;
+        }
+
+        /* ===== 新增景點模態框樣式 ===== */
+        .sight-modal-container {
+            background-color: var(--modal-sight-bg);
+            width: 360px;
+            height: 420px;
+            max-width: 100%;
+            border: none;
+            padding: 20px 16px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--modal-sight-text) var(--modal-sight-bg);
+        }
+        
+        .sight-modal-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .sight-modal-container::-webkit-scrollbar-track {
+            background: var(--modal-sight-bg);
+        }
+        
+        .sight-modal-container::-webkit-scrollbar-thumb {
+            background: var(--modal-sight-text);
+            border-radius: 4px;
+        }
+        
+        .sight-modal-container::-webkit-scrollbar-thumb:hover {
+            background: #0f331c;
+        }
+        
+        .sight-modal-container::-webkit-scrollbar-button {
+            background: var(--modal-sight-text);
+            height: 16px;
+        }
+        
+        .sight-modal-title {
+            font-family: Helvetica, sans-serif;
+            font-weight: bold;
+            font-size: 32px;
+            letter-spacing: 1px;
+            color: var(--modal-sight-text);
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        
+        .sight-modal-divider {
+            font-family: monospace;
+            font-size: 20px;
+            letter-spacing: 1px;
+            color: var(--modal-sight-text);
+            text-align: left;
+            margin-bottom: 20px;
+            width: 100%;
+            position: relative;
+            top: -18.9px;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        
+        .sight-modal-form-group {
+            margin-bottom: 15px;
+        }
+        
+        .sight-modal-input {
+            width: 100%;
+            padding: 8px 10px;
+            background-color: var(--modal-sight-bg);
+            border: none;
+            border-radius: 0;
+            color: #333;
+            font-size: 16px;
+            font-family: Helvetica, sans-serif;
+        }
+        
+        .sight-modal-input:focus {
+            outline: none;
+            background-color: #5bb07a;
+        }
+        
+        .sight-modal-input::placeholder {
+            color: var(--modal-sight-text);
+            font-style: normal;
+            font-family: Helvetica, sans-serif;
+            font-size: 16px;
+        }
+        
+        .sight-modal-textarea {
+            width: 100%;
+            padding: 8px 10px;
+            background-color: var(--modal-sight-bg);
+            border: none;
+            border-radius: 0;
+            color: #333;
+            font-size: 16px;
+            font-family: Helvetica, sans-serif;
+            resize: none;
+            height: 50px;
+        }
+        
+        .sight-modal-textarea:focus {
+            outline: none;
+            background-color: #5bb07a;
+        }
+        
+        .sight-modal-textarea::placeholder {
+            color: var(--modal-sight-text);
+            font-style: normal;
+            font-family: Helvetica, sans-serif;
+            font-size: 16px;
+        }
+        
+        .sight-modal-file-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .sight-modal-file-label {
+            font-family: Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--modal-sight-text);
+            white-space: nowrap;
+            margin-right: 8px;
+        }
+        
+        .sight-modal-file-label-small {
+            font-family: Helvetica, sans-serif;
+            font-size: 12px;
+            font-weight: normal;
+            color: var(--modal-sight-text);
+            white-space: nowrap;
+        }
+        
+        .sight-modal-file-btn {
+            background-color: transparent;
+            border: 1px solid var(--modal-sight-text);
+            color: var(--modal-sight-text);
+            padding: 4px 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 0;
+            white-space: nowrap;
+            font-family: Helvetica, sans-serif;
+        }
+        
+        .sight-modal-file-status {
+            font-size: 14px;
+            color: var(--modal-sight-text);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100px;
+            text-align: right;
+            font-family: Helvetica, sans-serif;
+        }
+        
+        .sight-modal-file-group {
+            margin-bottom: 15px;
+        }
+        
+        .sight-modal-file-input {
+            display: none;
+        }
+        
+        .sight-modal-button-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .sight-modal-btn {
+            flex: 1;
+            background-color: transparent;
+            color: var(--modal-sight-text);
+            border: none;
+            font-family: Helvetica, sans-serif;
+            font-weight: bold;
+            font-size: 24px;
+            padding: 10px 0;
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        .sight-modal-btn:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header class="heading-section">
+        <div class="header-title-box">
+            <div class="title-cn"><span>成</span><span>都</span><span>川</span><span>西</span><span>遊</span></div>
+            <div class="title-en"><span>C</span><span>H</span><span>E</span><span>N</span><span>G</span><span>D</span><span>U</span><span>&nbsp;</span><span>A</span><span>N</span><span>D</span><span>&nbsp;</span><span>W</span><span>E</span><span>S</span><span>T</span><span>E</span><span>R</span><span>N</span><span>&nbsp;</span><span>S</span><span>I</span><span>C</span><span>H</span><span>U</span><span>A</span><span>N</span></div>
+        </div>
+        <div class="header-bottom-decor"></div>
+    </header>
+
+    <main>
+        <!-- 主頁 -->
+        <section id="page-main" class="tab-page">
+            <div class="ticket-wrapper hide-scrollbar">
+                <div class="ticket shadow-xl">
+                    <div class="ticket-top-stripe"></div>
+                    <div class="ticket-content">
+                        <div class="ticket-left-section">
+                            <div class="left-boarding-pass">BOARDING PASS</div>
+                            <div class="airport-code-container">
+                                <div class="airport-block"><span class="airport-fullname">Shenzhen, Bao'an</span><span class="airport-code-main">SZX</span></div>
+                                <div class="flight-icon-container"><i class="fa-solid fa-plane flight-icon"></i></div>
+                                <div class="airport-block"><span class="airport-fullname">Chengdu Tianfu</span><span class="airport-code-main">TFU</span></div>
+                            </div>
+                            <div class="flight-info-container"><div class="flight-icons"><span><i class="fa-solid fa-building"></i> T3</span><span><i class="fa-solid fa-clock"></i> 2H 35M</span><span><i class="fa-solid fa-suitcase"></i> 20KG</span></div></div>
+                        </div>
+                        <div class="ticket-right-section">
+                            <div class="flight-no-block"><div class="flight-no-label">Flight No.</div><div class="ticket-no">ZH9403</div></div>
+                            <div class="datetime-container"><div class="date-block"><div class="date-label">Date</div><div class="date-value">6Mar</div></div><span class="datetime-separator">/</span><div class="time-block"><div class="time-label">Time</div><div class="time-value">08:00</div></div></div>
+                            <div class="barcode-container"><i class="fa-solid fa-barcode barcode-icon"></i></div>
+                        </div>
+                    </div>
+                    <div class="ticket-bottom-stripe"></div>
+                </div>
+                <div class="ticket shadow-xl">
+                    <div class="ticket-top-stripe"></div>
+                    <div class="ticket-content">
+                        <div class="ticket-left-section">
+                            <div class="left-boarding-pass">BOARDING PASS</div>
+                            <div class="airport-code-container">
+                                <div class="airport-block"><span class="airport-fullname">Chengdu Tianfu</span><span class="airport-code-main">TFU</span></div>
+                                <div class="flight-icon-container"><i class="fa-solid fa-plane fa-rotate-180 flight-icon"></i></div>
+                                <div class="airport-block"><span class="airport-fullname">Shenzhen, Bao'an</span><span class="airport-code-main">SZX</span></div>
+                            </div>
+                            <div class="flight-info-container"><div class="flight-icons"><span><i class="fa-solid fa-building"></i> T1</span><span><i class="fa-solid fa-clock"></i> 2H 00M</span><span><i class="fa-solid fa-suitcase"></i> 20KG</span></div></div>
+                        </div>
+                        <div class="ticket-right-section">
+                            <div class="flight-no-block"><div class="flight-no-label">Flight No.</div><div class="ticket-no">3U6795</div></div>
+                            <div class="datetime-container"><div class="date-block"><div class="date-label">Date</div><div class="date-value">18Mar</div></div><span class="datetime-separator">/</span><div class="time-block"><div class="time-label">Time</div><div class="time-value">17:00</div></div></div>
+                            <div class="barcode-container"><i class="fa-solid fa-barcode barcode-icon"></i></div>
+                        </div>
+                    </div>
+                    <div class="ticket-bottom-stripe"></div>
+                </div>
+            </div>
+
+            <div class="weather-decoration-container">
+                <div class="weather-dot-bar"><span class="weather-bar-text">各地區天氣</span></div>
+            </div>
+            
+            <div id="weather-row" class="weather-scroll-row hide-scrollbar"></div>
+        </section>
+
+        <!-- 行程頁 -->
+        <section id="page-itinerary" class="tab-page hide">
+            <div class="iti-section">
+                <div id="scrolling-dates" class="hide-scrollbar"></div>
+                
+                <div class="iti-header-row">
+                    <div class="date-stripe-box">
+                        <span id="label-day" class="iti-cal-day">06</span>
+                        <span class="iti-cal-month">MAR</span>
+                    </div>
+                    <div id="hotel-card-display" class="hotel-nav-card"></div>
+                </div>
+
+                <div id="plans-list" class="space-y-4 mb-10"></div>
+
+                <div class="button-wrapper">
+                    <button onclick="openModal('add-modal-plan')" class="btn-style">新增行程</button>
+                    <button onclick="toggleDeleteMode()" class="btn-style">刪除行程</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 景點頁 -->
+        <section id="page-sights" class="tab-page hide">
+            <div class="sights-header-container">
+                <button onclick="openSightModal()" class="add-sight-btn">📌</button>
+            </div>
+            
+            <div class="sights-content">
+                <div id="sights-render" class="polaroid-grid"></div>
+            </div>
+            
+            <div class="sights-bottom-stripe">
+                <div class="trapezoid-container">
+                    <div class="sights-trapezoid"></div>
+                    <h2 class="sights-header">景點手冊</h2>
+                </div>
+                
+                <div class="paper-folder-container">
+                    <div class="paper-folder-text">PAPER FOLDER</div>
+                    <div class="black-line"></div>
+                </div>
+                
+                <button class="delete-sight-bottom-btn" onclick="toggleSightDeleteMode()">🗑</button>
+            </div>
+        </section>
+
+        <!-- 匯率頁 -->
+        <section id="page-wallet" class="tab-page hide">
+            <div class="wallet-container">
+                <div class="bg-[#F0E6DA] p-8 rounded-3xl border-4 border-black w-full h-full flex flex-col items-center justify-center">
+                    <div id="calc-result" class="bg-black text-[#EDB1A3] p-6 rounded-2xl text-right text-4xl font-mono mb-6 w-full">0</div>
+                    <div id="calc-keypad" class="grid grid-cols-4 gap-4 w-full"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 清單頁 -->
+        <section id="page-list" class="tab-page hide">
+            <!-- 注意事項卡片 -->
+            <div class="notice-card" id="notice-card">
+                <div class="notice-header">
+                    <span>📌 注意事項</span>
+                    <button class="notice-add-btn" onclick="openNoticeModal()">+</button>
+                </div>
+                <div id="notice-list"></div>
+            </div>
+
+            <!-- LOGO 切換按鈕 (暫時用文字代替，直到圖片上傳) -->
+            <div class="logo-selector-row">
+                <button onclick="showChecklist('logo1', this)" class="logo-selector active">①</button>
+                <button onclick="showChecklist('logo2', this)" class="logo-selector">②</button>
+                <button onclick="showChecklist('logo3', this)" class="logo-selector">③</button>
+                <button onclick="showChecklist('logo4', this)" class="logo-selector">④</button>
+            </div>
+            
+            <!-- 行李清單卡片容器 -->
+            <div id="checklist-container" class="px-2"></div>
+        </section>
+    </main>
+
+    <!-- 底部導航 -->
+    <div class="footer-nav">
+        <div class="nav-l12"></div>
+        <div class="nav-l8"></div>
+        <div class="nav-l7"></div>
+        <nav class="nav-inner">
+            <button onclick="switchTab('page-main', this)" class="nav-item active">
+                <i class="fa-solid fa-house"></i>
+                <span>主頁</span>
+            </button>
+            <button onclick="switchTab('page-itinerary', this)" class="nav-item">
+                <i class="fa-solid fa-calendar-alt"></i>
+                <span>行程</span>
+            </button>
+            <button onclick="switchTab('page-sights', this)" class="nav-item">
+                <i class="fa-solid fa-camera"></i>
+                <span>景點</span>
+            </button>
+            <button onclick="switchTab('page-wallet', this)" class="nav-item">
+                <i class="fa-solid fa-calculator"></i>
+                <span>匯率</span>
+            </button>
+            <button onclick="switchTab('page-list', this)" class="nav-item">
+                <i class="fa-solid fa-list-ul"></i>
+                <span>清單</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- 圖片燈箱 -->
+    <div id="photo-lightbox" class="photo-lightbox hide" onclick="closeLightbox()">
+        <div class="close-lightbox" onclick="closeLightbox()">✕</div>
+        <div id="lightbox-scroll" class="lightbox-scroll hide-scrollbar"></div>
+    </div>
+
+    <!-- 新增注意事項模態框 -->
+    <div id="notice-modal" class="notice-modal hide">
+        <div class="notice-modal-content">
+            <div class="notice-modal-title">新增注意事項</div>
+            <textarea id="notice-text" class="notice-modal-input" rows="3" placeholder="請輸入注意事項內容..."></textarea>
+            <div class="notice-modal-file">
+                <label>上載圖片 (可選)</label>
+                <input type="file" id="notice-image" accept="image/*">
+            </div>
+            <div class="notice-modal-buttons">
+                <button class="notice-modal-btn" onclick="saveNotice()">儲存</button>
+                <button class="notice-modal-btn cancel" onclick="closeNoticeModal()">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 新增行程模態框 -->
+    <div id="add-modal-plan" class="fixed inset-0 bg-black/90 z-[2000] hide flex items-center justify-center p-4">
+        <div class="modal-container">
+            <div class="modal-title">
+                <div class="modal-title-row next">
+                    <span>N</span><span>E</span><span>X</span><span>T</span>
+                </div>
+                <div class="modal-title-row destination">
+                    <span>D</span><span>E</span><span>S</span><span>T</span><span>I</span><span>N</span><span>A</span><span>T</span><span>I</span><span>O</span><span>N</span>
+                </div>
+            </div>
+            
+            <div class="modal-category-container">
+                <div class="modal-category-left">
+                    <button type="button" id="morning-call-btn" class="modal-morning-btn" onclick="selectMorningCall()">
+                        MORNING CALL🐓
+                    </button>
+                </div>
+                <div class="modal-category-right">
+                    <button type="button" id="category-food" class="modal-category-btn" onclick="selectCategory('food')">
+                        🍴 美食
+                    </button>
+                    <button type="button" id="category-spot" class="modal-category-btn" onclick="selectCategory('spot')">
+                        📍 景點
+                    </button>
+                </div>
+            </div>
+            
+            <div>
+                <div class="modal-form-group">
+                    <label class="modal-label">時間</label>
+                    <div class="modal-time-selector">
+                        <input id="input-time" type="time" class="modal-input">
+                        <select id="input-time-period" class="modal-select">
+                            <option value="">時段</option>
+                            <option value="上午">上午</option>
+                            <option value="中午">中午</option>
+                            <option value="下午">下午</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="modal-form-group">
+                    <label class="modal-label">車程</label>
+                    <input id="input-drive" type="text" class="modal-input">
+                </div>
+                
+                <div class="modal-form-group">
+                    <label class="modal-label">目的地景點</label>
+                    <input id="input-location" type="text" class="modal-input">
+                </div>
+                
+                <div class="modal-form-group">
+                    <label class="modal-label">景點簡介</label>
+                    <textarea id="input-description" rows="2" class="modal-textarea"></textarea>
+                </div>
+                
+                <div class="modal-form-group">
+                    <label class="modal-label">目的地地址</label>
+                    <input id="input-address" type="text" class="modal-input">
+                </div>
+                
+                <div class="modal-form-group">
+                    <label class="modal-label">上載圖片 [最多五張]</label>
+                    
+                    <div class="modal-photo-card">
+                        <input type="file" id="input-img1" accept="image/*">
+                        <input type="text" id="input-caption1" placeholder="15字以內簡介" maxlength="15">
+                    </div>
+                    
+                    <div class="modal-photo-card">
+                        <input type="file" id="input-img2" accept="image/*">
+                        <input type="text" id="input-caption2" placeholder="15字以內簡介" maxlength="15">
+                    </div>
+                    
+                    <div class="modal-photo-card">
+                        <input type="file" id="input-img3" accept="image/*">
+                        <input type="text" id="input-caption3" placeholder="15字以內簡介" maxlength="15">
+                    </div>
+                    
+                    <div class="modal-photo-card">
+                        <input type="file" id="input-img4" accept="image/*">
+                        <input type="text" id="input-caption4" placeholder="15字以內簡介" maxlength="15">
+                    </div>
+                    
+                    <div class="modal-photo-card">
+                        <input type="file" id="input-img5" accept="image/*">
+                        <input type="text" id="input-caption5" placeholder="15字以內簡介" maxlength="15">
+                    </div>
+                </div>
+                
+                <input type="hidden" id="input-category" value="">
+                
+                <div class="modal-button-container">
+                    <button onclick="handleSavePlan()" class="modal-btn">儲存行程</button>
+                    <button onclick="closeModal('add-modal-plan')" class="modal-btn cancel">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 新增景點模態框 -->
+    <div id="add-modal-sight" class="fixed inset-0 bg-black/80 z-[2000] hide flex items-center justify-center p-4">
+        <div class="sight-modal-container">
+            <div class="sight-modal-title">TRAVEL GUIDE</div>
+            <div class="sight-modal-divider">*************************************</div>
+            
+            <div class="sight-modal-form-group">
+                <input id="sight-title" type="text" class="sight-modal-input" placeholder="景點名稱">
+            </div>
+            
+            <div class="sight-modal-form-group">
+                <textarea id="sight-body" class="sight-modal-textarea" placeholder="簡單介紹" rows="2"></textarea>
+            </div>
+            
+            <!-- 封面照片 - 水平排列 -->
+            <div class="sight-modal-file-group">
+                <div class="sight-modal-file-row">
+                    <span class="sight-modal-file-label">封面照片</span>
+                    <button class="sight-modal-file-btn" onclick="document.getElementById('sight-main-pic').click()">選擇檔案</button>
+                    <span class="sight-modal-file-status" id="cover-file-status">未選擇任何檔案</span>
+                </div>
+                <input type="file" id="sight-main-pic" accept="image/*" class="sight-modal-file-input" onchange="updateFileStatus('cover')">
+            </div>
+            
+            <!-- 相簿照片 - 水平排列 -->
+            <div class="sight-modal-file-group">
+                <div class="sight-modal-file-row">
+                    <span class="sight-modal-file-label">相簿照片 <span class="sight-modal-file-label-small">[可選三張]</span></span>
+                    <button class="sight-modal-file-btn" onclick="document.getElementById('sight-album-pics').click()">選擇檔案</button>
+                    <span class="sight-modal-file-status" id="album-file-status">未選擇任何檔案</span>
+                </div>
+                <input type="file" id="sight-album-pics" accept="image/*" multiple class="sight-modal-file-input" onchange="updateAlbumStatus()">
+            </div>
+            
+            <div class="sight-modal-button-container">
+                <button onclick="handleSaveSight()" class="sight-modal-btn">SAVE</button>
+                <button onclick="closeModal('add-modal-sight')" class="sight-modal-btn">CANCEL</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 靜態天氣資料
+        const WEATHER_POINTS = [
+            { id: "chengdu", name: "成都市中心", image: "成都.jpeg" },
+            { id: "kangding", name: "康定市", image: "康定市.jpeg" },
+            { id: "xinduqiao", name: "新都橋", image: "四姑娘山.jpeg" },
+            { id: "siguniang", name: "四姑娘山", image: "新都橋.jpeg" },
+            { id: "bipeng", name: "畢棚溝", image: "畢棚溝.jpeg" },
+            { id: "dagu", name: "達古冰川", image: "達古冰川.jpeg" }
+        ];
+
+        const weatherData = [
+            { temp: 8, min: 3, max: 12, icon: 'fa-solid fa-cloud' },
+            { temp: 5, min: 0, max: 8, icon: 'fa-solid fa-cloud-rain' },
+            { temp: 2, min: -2, max: 5, icon: 'fa-solid fa-snowflake' },
+            { temp: 10, min: 6, max: 14, icon: 'fa-solid fa-cloud-sun' },
+            { temp: 12, min: 8, max: 16, icon: 'fa-solid fa-sun' },
+            { temp: -3, min: -7, max: 0, icon: 'fa-solid fa-snowflake' }
+        ];
+
+        const STAY_LIST = {
+            "6MAR": { n: "一朵禪茶裡｜美學酒店", a: "四川成都武侯區武侯祠大街244號", lat: 30.647, lon: 104.048 },
+            "7MAR": { n: "一朵禪茶裡｜美學酒店", a: "四川成都武侯區武侯祠大街244號", lat: 30.647, lon: 104.048 },
+            "8MAR": { n: "一朵禪茶裡｜美學酒店", a: "四川成都武侯區武侯祠大街244號", lat: 30.647, lon: 104.048 },
+            "9MAR": { n: "康定市斯卡爾民宿", a: "四川康定塔公鎮色齊卡村", lat: 30.316, lon: 101.523 },
+            "10MAR": { n: "康定市斯卡爾民宿", a: "四川康定塔公鎮色齊卡村", lat: 30.316, lon: 101.523 },
+            "11MAR": { n: "SAANYU山語·姑弄民宿", a: "四川康定塔公鎮姑弄村", lat: 30.347, lon: 101.516 },
+            "12MAR": { n: "新都橋帕瑞南卡度假酒店", a: "四川康定新一村", lat: 30.051, lon: 101.524 },
+            "13MAR": { n: "光與林PeeKaboo私湯酒店", a: "四川丹巴甲居鎮", lat: 30.887, lon: 101.884 },
+            "14MAR": { n: "大隱與跡民宿", a: "中國四川四姑娘山鎮", lat: 30.992, lon: 102.894 },
+            "15MAR": { n: "大隱與跡民宿", a: "中國四川四姑娘山鎮", lat: 30.992, lon: 102.894 },
+            "16MAR": { n: "卓邸康欽私湯溫泉", a: "四川理縣古爾溝鎮", lat: 31.545, lon: 102.761 },
+            "17MAR": { n: "成都春熙路諾富特酒店", a: "錦興路41號1層, 錦江區, 成都", lat: 30.657, lon: 104.078 },
+            "18MAR": { n: "返屋企啦", a: "香港", lat: 22.3193, lon: 114.1694 }
+        };
+
+        // 行李清單資料
+        const checklistData = {
+            logo4: [
+                { heading: "重要物品", items: ["回鄉證", "人民幣", "電話卡"] },
+                { heading: "個人物品", items: ["牙膏牙刷", "牙線/牙簽", "一次性浴巾/浴巾", "梳", "夾髮棒", "橡皮筋", "隱形眼鏡藥水", "卸妝產品", "潔面產品", "護膚品", "身體潤膚乳液", "面部防曬霜", "身體防曬霜", "潤唇膏", "化妝品", "假睫毛"] },
+                { heading: "個人衣物", items: ["內衣內褲", "保暖底衫", "保暖褲", "基礎衣物", "睡衣", "手套", "冷帽/帽", "雪鞋", "波鞋", "拖鞋", "太陽眼鏡", "眼鏡"] },
+                { heading: "電子產品", items: ["耳機", "充電器與充電線", "充電寶", "轉換插頭"] },
+                { heading: "藥品", items: ["暖包", "高原反應藥", "感冒藥", "腸胃藥", "膠布", "葡萄糖", "口罩"] },
+                { heading: "婚照用品", items: ["NuBra", "修身衣", "保暖襪褲", "衣物", "婚照高跟鞋", "婚照長靴"] }
+            ],
+            logo3: [
+                { heading: "重要物品", items: ["回鄉證", "人民幣", "電話卡"] },
+                { heading: "個人物品", items: ["牙膏牙刷", "牙線/牙簽", "一次性浴巾/浴巾", "梳", "夾髮棒", "潤膚乳", "身體潤膚乳液", "防曬霜", "潤唇膏", "剃鬚刀"] },
+                { heading: "個人衣物", items: ["內衣內褲", "保暖底衫", "保暖褲", "基礎衣物", "睡衣", "手套", "冷帽/帽", "雪鞋", "波鞋", "拖鞋", "太陽眼鏡", "眼鏡"] },
+                { heading: "電子產品", items: ["耳機", "充電器與充電線", "充電寶", "轉換插頭", "相機[相機電池與儲存卡]", "三腳架"] },
+                { heading: "藥品", items: ["暖包", "敏感藥", "高原反應藥", "感冒藥", "腸胃藥", "膠布", "葡萄糖", "口罩"] },
+                { heading: "婚照用品", items: ["衣物", "婚照皮鞋"] }
+            ],
+            logo2: [
+                { heading: "重要物品", items: ["回鄉證", "人民幣", "電話卡"] },
+                { heading: "個人物品", items: ["牙膏牙刷", "牙線/牙簽", "一次性浴巾/浴巾", "梳", "夾髮棒", "潤膚乳", "身體潤膚乳液", "面部防曬霜", "身體防曬霜", "潤唇膏"] },
+                { heading: "個人衣物", items: ["內衣內褲", "保暖底衫", "保暖褲", "基礎衣物", "睡衣", "手套", "冷帽/帽", "雪鞋", "波鞋", "拖鞋", "太陽眼鏡", "眼鏡"] },
+                { heading: "電子產品", items: ["耳機", "充電器與充電線", "充電寶", "轉換插頭"] },
+                { heading: "藥品", items: ["暖包", "高原反應藥", "感冒藥", "腸胃藥", "膠布", "葡萄糖", "口罩"] }
+            ],
+            logo1: [
+                { heading: "重要物品", items: ["回鄉證", "人民幣", "電話卡"] },
+                { heading: "個人物品", items: ["牙膏牙刷", "牙線/牙簽", "一次性浴巾/浴巾", "梳", "夾髮棒", "潤膚乳", "身體潤膚乳液", "面部防曬霜", "身體防曬霜", "潤唇膏", "剃鬚刀"] },
+                { heading: "個人衣物", items: ["內衣內褲", "保暖底衫", "保暖褲", "基礎衣物", "睡衣", "手套", "冷帽/帽", "雪鞋", "波鞋", "拖鞋", "太陽眼鏡", "眼鏡"] },
+                { heading: "電子產品", items: ["耳機", "充電器與充電線", "充電寶", "轉換插頭"] },
+                { heading: "藥品", items: ["暖包", "高原反應藥", "感冒藥", "腸胃藥", "膠布", "葡萄糖", "口罩"] }
+            ]
+        };
+
+        // 儲存每個項目的勾選狀態
+        let checklistState = JSON.parse(localStorage.getItem('checklist_state') || '{}');
+        
+        // 儲存注意事項
+        let notices = JSON.parse(localStorage.getItem('notices') || '[]');
+
+        let selectedDay = "6MAR";
+        let delModePlans = false;
+        let delModeSights = false;
+        let calcText = "0";
+        let selectedCategory = "";
+        let isMorningCall = false;
+        let currentSightId = null;
+
+        window.onload = () => {
+            renderWeatherCards();
+            renderDateTabs();
+            updatePlanUI();
+            renderSights();
+            setupKeypad();
+            renderNotices();
+            
+            // 預設顯示 LOGO1 的清單
+            setTimeout(() => {
+                const firstLogo = document.querySelector('.logo-selector');
+                if (firstLogo) showChecklist('logo1', firstLogo);
+            }, 100);
+        };
+
+        function renderWeatherCards() {
+            const row = document.getElementById('weather-row');
+            if(!row) return;
+            row.innerHTML = ""; 
+            
+            WEATHER_POINTS.forEach((p, index) => {
+                const data = weatherData[index % weatherData.length];
+                
+                row.innerHTML += `
+                    <div class="weather-card">
+                        <div class="weather-card-top">
+                            <span class="weather-temp-val">${data.temp}°C</span>
+                            <span class="weather-temp-range">${data.min}° ~ ${data.max}°</span>
+                            <i class="${data.icon} weather-icon"></i>
+                            <span class="weather-region">${p.name}</span>
+                        </div>
+                        <div class="weather-divider-container">
+                            <div class="weather-divider"></div>
+                            <div class="divider-left-circle"></div>
+                            <div class="divider-right-circle"></div>
+                        </div>
+                        <div class="weather-card-bottom">
+                            <img src="${p.image}" alt="${p.name}" class="weather-bottom-image" onerror="this.src='https://via.placeholder.com/148x82?text=${p.name}'">
+                        </div>
+                    </div>`;
+            });
+        }
+
+        function renderDateTabs() {
+            const days = ["6MAR", "7MAR", "8MAR", "9MAR", "10MAR", "11MAR", "12MAR", "13MAR", "14MAR", "15MAR", "16MAR", "17MAR", "18MAR"];
+            document.getElementById('scrolling-dates').innerHTML = days.map(d => `<button onclick="setDay('${d}')" class="date-btn ${d===selectedDay?'date-btn-active':''}">${d}</button>`).join('');
+        }
+
+        function setDay(d) { 
+            selectedDay = d; 
+            renderDateTabs(); 
+            updatePlanUI(); 
+        }
+
+        function updatePlanUI() {
+            document.getElementById('label-day').innerText = selectedDay.replace('MAR', '').padStart(2, '0');
+            
+            const h = STAY_LIST[selectedDay];
+            const hBox = document.getElementById('hotel-card-display');
+            if (h) {
+                hBox.innerHTML = `
+                    <div style="grid-column: span 1">
+                        <p class="hotel-h3">今晚瞓呢到</p>
+                        <h4 class="hotel-name">${h.n}</h4>
+                        <p class="hotel-addr">${h.a}</p>
+                    </div>
+                    <div class="h-24 rounded-2xl overflow-hidden border border-white/20">
+                        <iframe width="100%" height="100%" frameborder="0" src="https://www.openstreetmap.org/export/embed.html?bbox=${h.lon-0.005},${h.lat-0.005},${h.lon+0.005},${h.lat+0.005}&layer=mapnik&marker=${h.lat},${h.lon}"></iframe>
+                    </div>
+                    <button onclick="navGps('${h.a}')" class="gps-button">即時GPS導航</button>`;
+            }
+
+            const db = JSON.parse(localStorage.getItem('plans_db_v26') || '{}');
+            const items = db[selectedDay] || [];
+            
+            items.sort((a, b) => {
+                if (a.time && b.time) return a.time.localeCompare(b.time);
+                if (a.time) return -1;
+                if (b.time) return 1;
+                return 0;
+            });
+            
+            document.getElementById('plans-list').innerHTML = items.map(p => {
+                const timeDisplay = p.time ? p.time : (p.period ? p.period : '');
+                const isMorning = p.cat === 'morning';
+                const lineClass = isMorning ? 'morning' : (p.cat === 'food' ? 'food' : 'spot');
+                const timeTagClass = isMorning ? 'time-tag morning' : 'time-tag';
+                const destinationTitle = isMorning ? 'MORNING CALL🐓' : p.location;
+                
+                return `
+                <div class="plan-card">
+                    <div class="timeline-container">
+                        <div class="timeline-line ${lineClass}"></div>
+                        <div class="timeline-content">
+                            <div class="flex items-start gap-2 mb-1 flex-wrap">
+                                <span class="${timeTagClass}">${timeDisplay}</span>
+                                ${!isMorning && p.drive ? `<span class="drive-tag"><i class="fa-solid fa-car"></i> ${p.drive}h</span>` : ''}
+                            </div>
+                            
+                            <div class="destination-title">${destinationTitle}</div>
+                            
+                            ${!isMorning && p.desc ? `<p class="spot-desc">${p.desc}</p>` : ''}
+                            
+                            ${!isMorning && p.address ? `
+                                <button onclick="navToAddress('${encodeURIComponent(p.address)}')" class="map-nav-btn">
+                                    <i class="fa-solid fa-location-dot"></i> 地圖導航
+                                </button>
+                            ` : ''}
+                            
+                            ${!isMorning && p.photos && p.photos.length > 0 ? `
+                                <div class="plan-photo-scroll">
+                                    ${p.photos.map(photo => `
+                                        <div class="plan-photo-card">
+                                            <img src="${photo.data}" class="photo-image">
+                                            <div class="photo-caption">${photo.caption || ''}</div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            ` : ''}
+                        </div>
+                        ${delModePlans ? `<button class="plan-delete-btn" onclick="delEntry(${p.id})">×</button>` : ''}
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        function navToAddress(address) {
+            const decodedAddress = decodeURIComponent(address);
+            window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(decodedAddress)}&travelmode=driving`);
+        }
+
+        function compress(file, quality = 0.6, width = 300) {
+            return new Promise((resolve, reject) => {
+                if (!file) {
+                    resolve(null);
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = e => {
+                    const img = new Image();
+                    img.src = e.target.result;
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        const scale = width / img.width;
+                        canvas.width = width; 
+                        canvas.height = img.height * scale;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        resolve(canvas.toDataURL('image/jpeg', quality));
+                    };
+                    img.onerror = reject;
+                };
+                reader.onerror = reject;
+            });
+        }
+
+        function selectMorningCall() {
+            isMorningCall = true;
+            selectedCategory = 'morning';
+            document.getElementById('input-category').value = 'morning';
+            
+            document.getElementById('morning-call-btn').classList.add('selected');
+            document.getElementById('category-food').classList.remove('selected');
+            document.getElementById('category-spot').classList.remove('selected');
+            
+            const inputs = [
+                document.getElementById('input-drive'),
+                document.getElementById('input-location'),
+                document.getElementById('input-description'),
+                document.getElementById('input-address'),
+                document.getElementById('input-img1'),
+                document.getElementById('input-img2'),
+                document.getElementById('input-img3'),
+                document.getElementById('input-img4'),
+                document.getElementById('input-img5'),
+                document.getElementById('input-caption1'),
+                document.getElementById('input-caption2'),
+                document.getElementById('input-caption3'),
+                document.getElementById('input-caption4'),
+                document.getElementById('input-caption5')
+            ];
+            
+            document.getElementById('input-time').classList.remove('disabled');
+            document.getElementById('input-time-period').classList.remove('disabled');
+            
+            inputs.forEach(input => {
+                if (input) {
+                    input.classList.add('disabled');
+                    input.disabled = true;
+                }
+            });
+        }
+
+        function selectCategory(cat) {
+            isMorningCall = false;
+            selectedCategory = cat;
+            document.getElementById('input-category').value = cat;
+            
+            document.getElementById('morning-call-btn').classList.remove('selected');
+            
+            const foodBtn = document.getElementById('category-food');
+            const spotBtn = document.getElementById('category-spot');
+            
+            foodBtn.classList.remove('selected');
+            spotBtn.classList.remove('selected');
+            
+            if (cat === 'food') {
+                foodBtn.classList.add('selected');
+            } else {
+                spotBtn.classList.add('selected');
+            }
+            
+            const allInputs = document.querySelectorAll('.modal-input, .modal-select, .modal-textarea, input[type="file"]');
+            allInputs.forEach(input => {
+                input.classList.remove('disabled');
+                input.disabled = false;
+            });
+        }
+
+        function resetModal() {
+            isMorningCall = false;
+            selectedCategory = '';
+            document.getElementById('input-category').value = '';
+            
+            document.getElementById('morning-call-btn').classList.remove('selected');
+            
+            const foodBtn = document.getElementById('category-food');
+            const spotBtn = document.getElementById('category-spot');
+            if (foodBtn) foodBtn.classList.remove('selected');
+            if (spotBtn) spotBtn.classList.remove('selected');
+            
+            document.getElementById('input-time').value = '';
+            document.getElementById('input-time-period').value = '';
+            document.getElementById('input-drive').value = '';
+            document.getElementById('input-location').value = '';
+            document.getElementById('input-description').value = '';
+            document.getElementById('input-address').value = '';
+            
+            const allInputs = document.querySelectorAll('.modal-input, .modal-select, .modal-textarea, input[type="file"]');
+            allInputs.forEach(input => {
+                input.classList.remove('disabled');
+                input.disabled = false;
+            });
+            
+            for (let i = 1; i <= 5; i++) {
+                const imgInput = document.getElementById(`input-img${i}`);
+                const captionInput = document.getElementById(`input-caption${i}`);
+                if (imgInput) {
+                    imgInput.value = '';
+                    imgInput.classList.remove('disabled');
+                    imgInput.disabled = false;
+                }
+                if (captionInput) {
+                    captionInput.value = '';
+                    captionInput.classList.remove('disabled');
+                    captionInput.disabled = false;
+                }
+            }
+        }
+
+        async function handleSavePlan() {
+            try {
+                const time = document.getElementById('input-time').value;
+                const period = document.getElementById('input-time-period').value;
+                const drive = document.getElementById('input-drive').value;
+                const location = document.getElementById('input-location').value;
+                const desc = document.getElementById('input-description').value;
+                const address = document.getElementById('input-address').value;
+                const cat = document.getElementById('input-category').value;
+                
+                if(!cat) {
+                    alert('請選擇分類！');
+                    return;
+                }
+                
+                if(!time && !period) {
+                    alert('請填寫具體時間 或 選擇時段！');
+                    return;
+                }
+                
+                if (cat === 'morning') {
+                    const db = JSON.parse(localStorage.getItem('plans_db_v26') || '{}');
+                    if(!db[selectedDay]) {
+                        db[selectedDay] = [];
+                    }
+                    
+                    const newPlan = {
+                        id: Date.now(),
+                        time: time,
+                        period: period,
+                        cat: 'morning'
+                    };
+                    
+                    db[selectedDay].push(newPlan);
+                    localStorage.setItem('plans_db_v26', JSON.stringify(db));
+                    
+                    closeModal('add-modal-plan');
+                    updatePlanUI();
+                    return;
+                }
+                
+                if(!location) {
+                    alert('請填寫景點名稱！');
+                    return;
+                }
+                
+                const photoPromises = [];
+                for (let i = 1; i <= 5; i++) {
+                    const fileInput = document.getElementById(`input-img${i}`);
+                    const captionInput = document.getElementById(`input-caption${i}`);
+                    
+                    if (fileInput && fileInput.files && fileInput.files[0]) {
+                        const promise = compress(fileInput.files[0], 0.6, 300)
+                            .then(compressedData => ({
+                                data: compressedData,
+                                caption: captionInput ? captionInput.value || '' : ''
+                            }));
+                        photoPromises.push(promise);
+                    }
+                }
+                
+                const photos = await Promise.all(photoPromises);
+                
+                const db = JSON.parse(localStorage.getItem('plans_db_v26') || '{}');
+                if(!db[selectedDay]) {
+                    db[selectedDay] = [];
+                }
+                
+                const newPlan = {
+                    id: Date.now(),
+                    time: time,
+                    period: period,
+                    drive: drive,
+                    location: location,
+                    desc: desc,
+                    address: address,
+                    photos: photos.length > 0 ? photos : null,
+                    cat: cat
+                };
+                
+                db[selectedDay].push(newPlan);
+                localStorage.setItem('plans_db_v26', JSON.stringify(db));
+                
+                closeModal('add-modal-plan');
+                updatePlanUI();
+                
+            } catch (error) {
+                console.error('儲存失敗:', error);
+                alert('儲存失敗，請重試');
+            }
+        }
+
+        function delEntry(id) { 
+            const db = JSON.parse(localStorage.getItem('plans_db_v26') || '{}');
+            if (db[selectedDay]) {
+                db[selectedDay] = db[selectedDay].filter(x => x.id !== id);
+                localStorage.setItem('plans_db_v26', JSON.stringify(db));
+                updatePlanUI();
+            }
+        }
+
+        function toggleDeleteMode() { 
+            delModePlans = !delModePlans; 
+            updatePlanUI(); 
+        }
+
+        function toggleSightDeleteMode() {
+            delModeSights = !delModeSights;
+            renderSights();
+        }
+
+        function openSightModal() {
+            document.getElementById('add-modal-sight').classList.remove('hide');
+            document.getElementById('cover-file-status').innerText = '未選擇任何檔案';
+            document.getElementById('album-file-status').innerText = '未選擇任何檔案';
+        }
+
+        function updateFileStatus(type) {
+            const input = document.getElementById(type === 'cover' ? 'sight-main-pic' : 'sight-album-pics');
+            const statusSpan = document.getElementById(type === 'cover' ? 'cover-file-status' : 'album-file-status');
+            
+            if (input.files && input.files.length > 0) {
+                if (type === 'cover') {
+                    statusSpan.innerText = input.files[0].name;
+                } else {
+                    statusSpan.innerText = `${input.files.length} 個檔案已選`;
+                }
+            } else {
+                statusSpan.innerText = '未選擇任何檔案';
+            }
+        }
+
+        function updateAlbumStatus() {
+            updateFileStatus('album');
+        }
+
+        function getRandomRotation() {
+            return (Math.random() * 10 - 5).toFixed(1);
+        }
+
+        function getRandomTapeColor() {
+            const colors = ['#6E765E', '#A8825E', '#a67988', '#733e4e'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        async function handleSaveSight() {
+            const n = document.getElementById('sight-title').value; 
+            const b = document.getElementById('sight-body').value; 
+            const mf = document.getElementById('sight-main-pic').files[0]; 
+            const af = document.getElementById('sight-album-pics').files;
+            
+            if(!n || !mf) {
+                alert('請填寫景點名稱並上傳封面照片');
+                return;
+            }
+            
+            const cover = await compress(mf, 0.7, 110);
+            const album = [];
+            for (let i = 0; i < Math.min(af.length, 3); i++) { 
+                album.push(await compress(af[i], 0.6, 400)); 
+            }
+            
+            const db = JSON.parse(localStorage.getItem('sights_db_v26') || '[]');
+            const newSight = { 
+                id: Date.now(), 
+                n, 
+                b, 
+                cover, 
+                album,
+                rotation: getRandomRotation(),
+                tapeColor: getRandomTapeColor()
+            };
+            db.unshift(newSight);
+            localStorage.setItem('sights_db_v26', JSON.stringify(db));
+            closeModal('add-modal-sight'); 
+            renderSights();
+        }
+
+        function renderSights() {
+            const db = JSON.parse(localStorage.getItem('sights_db_v26') || '[]');
+            const container = document.getElementById('sights-render');
+            
+            container.innerHTML = db.map(s => {
+                const tapeLeft = Math.random() * 60 + 20;
+                
+                return `
+                <div class="polaroid-card" style="position: relative;">
+                    <div class="polaroid-photo-container" onclick="openLightbox(${s.id})">
+                        <img src="${s.cover}" class="polaroid-photo">
+                    </div>
+                    <div class="polaroid-title">${s.n}</div>
+                    <div class="polaroid-description">${s.b || ''}</div>
+                    <div class="tape" style="left: ${tapeLeft}%; --rotation: ${s.rotation}deg; background-color: ${s.tapeColor};"></div>
+                    ${delModeSights ? `<button class="polaroid-delete-btn" onclick="deleteSight(${s.id})">×</button>` : ''}
+                </div>`;
+            }).join('');
+        }
+
+        function openLightbox(sightId) {
+            const db = JSON.parse(localStorage.getItem('sights_db_v26') || '[]');
+            const sight = db.find(s => s.id === sightId);
+            if (!sight) return;
+            
+            currentSightId = sightId;
+            
+            const allPhotos = [sight.cover, ...(sight.album || [])];
+            
+            const scrollContainer = document.getElementById('lightbox-scroll');
+            scrollContainer.innerHTML = allPhotos.map(photo => 
+                `<img src="${photo}" class="lightbox-image">`
+            ).join('');
+            
+            document.getElementById('photo-lightbox').classList.remove('hide');
+        }
+
+        function closeLightbox() {
+            document.getElementById('photo-lightbox').classList.add('hide');
+        }
+
+        function deleteSight(id) {
+            let db = JSON.parse(localStorage.getItem('sights_db_v26') || '[]');
+            db = db.filter(s => s.id !== id);
+            localStorage.setItem('sights_db_v26', JSON.stringify(db));
+            renderSights();
+        }
+
+        function setupKeypad() {
+            const keys = ['7','8','9','/','4','5','6','*','1','2','3','-','C','0','=','+'];
+            document.getElementById('calc-keypad').innerHTML = keys.map(k => `<button onclick="tapKey('${k}')" class="bg-white border border-black p-3 text-lg font-black">${k}</button>`).join('') + `<button onclick="toHKD()" class="col-span-4 bg-green-900 text-white py-3 text-sm">Convert to HKD (1.09)</button>`;
+        }
+
+        function tapKey(k) { 
+            if(k==='C') calcText="0"; 
+            else if(k==='=') { 
+                try { calcText = eval(calcText).toString(); } 
+                catch{ calcText="Err"; } 
+            } else { 
+                calcText = calcText === "0" ? k : calcText + k; 
+            } 
+            document.getElementById('calc-result').innerText = calcText; 
+        }
+
+        function toHKD() { 
+            tapKey('='); 
+            if(calcText !== "Err") { 
+                calcText = (parseFloat(calcText) * 1.09).toFixed(2); 
+                document.getElementById('calc-result').innerText = calcText; 
+            } 
+        }
+
+        function switchTab(id, btn) {
+            document.querySelectorAll('.tab-page').forEach(p => p.classList.add('hide'));
+            document.getElementById(id).classList.remove('hide');
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('nav-active'));
+            btn.classList.add('nav-active');
+            window.scrollTo(0,0);
+            
+            // 如果切換到清單頁，確保有顯示預設清單
+            if (id === 'page-list') {
+                setTimeout(() => {
+                    const firstLogo = document.querySelector('.logo-selector');
+                    if (firstLogo) showChecklist('logo1', firstLogo);
+                }, 100);
+            }
+        }
+
+        function closeModal(id) { 
+            document.getElementById(id).classList.add('hide'); 
+            if (id === 'add-modal-plan') {
+                resetModal();
+            }
+        }
+
+        function openModal(id) { 
+            document.getElementById(id).classList.remove('hide'); 
+        }
+
+        function navGps(a) { 
+            window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(a)}&travelmode=driving`); 
+        }
+
+        // 行李清單顯示函數
+        function showChecklist(logoId, btn) {
+            // 更新按鈕 active 狀態
+            document.querySelectorAll('.logo-selector').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            
+            const data = checklistData[logoId];
+            if (!data) return;
+            
+            const container = document.getElementById('checklist-container');
+            container.innerHTML = '';
+            
+            data.forEach(card => {
+                const cardDiv = document.createElement('div');
+                cardDiv.className = 'checklist-card';
+                
+                // 加入標題
+                const heading = document.createElement('div');
+                heading.className = 'checklist-heading';
+                heading.textContent = card.heading;
+                cardDiv.appendChild(heading);
+                
+                // 加入項目列表
+                card.items.forEach(item => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'checklist-item';
+                    
+                    // 項目名稱
+                    const itemText = document.createElement('span');
+                    itemText.textContent = item;
+                    
+                    // 勾選框
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.className = 'checklist-checkbox';
+                    
+                    // 建立唯一 ID 用於儲存狀態
+                    const itemId = `${logoId}_${card.heading}_${item}`;
+                    
+                    // 讀取儲存的狀態
+                    if (checklistState[itemId]) {
+                        checkbox.checked = true;
+                        itemDiv.classList.add('checked');
+                    }
+                    
+                    // 勾選事件
+                    checkbox.addEventListener('change', function(e) {
+                        if (this.checked) {
+                            itemDiv.classList.add('checked');
+                            checklistState[itemId] = true;
+                        } else {
+                            itemDiv.classList.remove('checked');
+                            delete checklistState[itemId];
+                        }
+                        // 儲存到 localStorage
+                        localStorage.setItem('checklist_state', JSON.stringify(checklistState));
+                    });
+                    
+                    itemDiv.appendChild(itemText);
+                    itemDiv.appendChild(checkbox);
+                    cardDiv.appendChild(itemDiv);
+                });
+                
+                container.appendChild(cardDiv);
+            });
+        }
+
+        // 注意事項相關函數
+        function openNoticeModal() {
+            document.getElementById('notice-modal').classList.remove('hide');
+        }
+
+        function closeNoticeModal() {
+            document.getElementById('notice-modal').classList.add('hide');
+            document.getElementById('notice-text').value = '';
+            document.getElementById('notice-image').value = '';
+        }
+
+        async function saveNotice() {
+            const text = document.getElementById('notice-text').value.trim();
+            if (!text) {
+                alert('請輸入注意事項內容');
+                return;
+            }
+
+            const imageFile = document.getElementById('notice-image').files[0];
+            let imageData = null;
+
+            if (imageFile) {
+                // 壓縮圖片為 140*140 尺寸
+                imageData = await compress(imageFile, 0.7, 140);
+            }
+
+            const newNotice = {
+                id: Date.now(),
+                text: text,
+                image: imageData
+            };
+
+            notices.unshift(newNotice);
+            localStorage.setItem('notices', JSON.stringify(notices));
+            
+            renderNotices();
+            closeNoticeModal();
+        }
+
+        function deleteNotice(id) {
+            notices = notices.filter(n => n.id !== id);
+            localStorage.setItem('notices', JSON.stringify(notices));
+            renderNotices();
+        }
+
+        function renderNotices() {
+            const container = document.getElementById('notice-list');
+            if (!container) return;
+
+            // 如果沒有注意事項，不顯示任何內容
+            if (notices.length === 0) {
+                container.innerHTML = '';
+                return;
+            }
+
+            container.innerHTML = notices.map(notice => `
+                <div class="notice-item" data-id="${notice.id}">
+                    <button class="notice-delete-btn" onclick="deleteNotice(${notice.id})">×</button>
+                    ${notice.image ? `
+                        <div class="notice-image-container">
+                            <img src="${notice.image}" class="notice-image" alt="注意事項圖片">
+                        </div>
+                    ` : ''}
+                    <div class="notice-content">${notice.text}</div>
+                </div>
+            `).join('');
+        }
+    </script>
+</body>
+</html>
